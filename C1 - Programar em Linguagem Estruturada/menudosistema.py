@@ -1,12 +1,9 @@
 manifestacoes = []
 
-manifestacao_reclamacao = ["reclamacao"]
-manifestacao_elogio  = ["elogio"]
-manifestacao_sugestao = ["sugestao"]
-
 # Menu --------------------------------------------------------------
 def menu():
-    while True:
+    opcao = ""
+    while opcao != "7":
         print("""--- MENU DO SISTEMA ---\n
 1) Listagem das Manifestações
 2) Listagem de Manifestações por Tipo
@@ -15,40 +12,39 @@ def menu():
 5) Pesquisar uma manifestação por código
 6) Excluir uma Manifestação pelo Código
 7) Sair do Sistema""")
-        opcao = input("\n   Escolha uma opção: ")
+        opcao = input("\nEscolha uma opção: ")
 
-        if opcao == "1": #1) Listagem das Manifestações
+        if opcao == "1":  # 1) Listagem das Manifestações
             limpar_console()
             listar_manifestacoes()
 
-        elif opcao == "2": #2) Listagem de Manifestações por Tipo
+        elif opcao == "2":  # 2) Listagem de Manifestações por Tipo
             limpar_console()
             listar_manifestacoes_tipo()
 
-        elif opcao == "3": #3) Criar uma nova Manifestação
+        elif opcao == "3":  # 3) Criar uma nova Manifestação
             limpar_console()
-            nova_manifestacao()
-        
-        elif opcao == "4": #4) Exibir quantidade de manifestações
+            criar_manifestacao()
+
+        elif opcao == "4":  # 4) Exibir quantidade de manifestações
             limpar_console()
             quantidade_manifestacoes()
-        
-        elif opcao == "5": #5) Pesquisar uma manifestação por código
+
+        elif opcao == "5":  # 5) Pesquisar uma manifestação por código
             limpar_console()
             pesquisar_manifestacao()
-        
-        elif opcao == "6": #6) Excluir uma Manifestação pelo Código
+
+        elif opcao == "6":  # 6) Excluir uma Manifestação pelo Código
             limpar_console()
             excluir_manifestacao()
-        
-        elif opcao == "7": #7) Sair do Sistema
+
+        elif opcao == "7":  # 7) Sair do Sistema
             limpar_console()
             exit()
 
         else:
             limpar_console()
             print("Opção inválida! Tente novamente...\n")
-            menu()
 
 # Limpar console ----------------------------------------------------
 def limpar_console():
@@ -57,45 +53,41 @@ def limpar_console():
 
 # Retornar ou Sair --------------------------------------------------
 def retornar_ou_sair():
-
-    print("""\n1) Menu
+    opcao = ""
+    while opcao != "2":
+        print("""\n1) Menu
 2) Sair""")
-    
-    opcao = input("\n   Escolha uma opção: ")
-    
-    if opcao == "1":
-        limpar_console()
-        menu()
+        opcao = input("\n  Escolha uma opção: ")
 
-    elif opcao == "2":
-        limpar_console()
-        exit()
+        if opcao == "1":
+            limpar_console()
+            menu()
+            return  # Retorna após o menu ser chamado para evitar duplicação
 
-    else:
-        limpar_console()
-        print("Opção inválida! Tente novamente...\n")
-        retornar_ou_sair()
+        elif opcao == "2":
+            limpar_console()
+            exit()
 
-#1) Listagem das Manifestações --------------------------------------
+        else:
+            limpar_console()
+            print("Opção inválida! Tente novamente...\n")
+
+# 1) Listagem das Manifestações --------------------------------------
 def listar_manifestacoes():
-
-    manifestacoes = manifestacao_reclamacao + manifestacao_elogio + manifestacao_sugestao
-
     if len(manifestacoes) == 0:
         print("Não há manifestações cadastradas.")
     else:
         print("--- LISTAGEM DE MANIFESTAÇÕES ---\n")
         for item in manifestacoes:
-            print("-", item)
+            print(f"Código: {item["codigo"]}, Tipo: {item["tipo"]}, Descrição: {item["descricao"]}, Autor: {item["autor"]}")
 
     retornar_ou_sair()
 
-#2) Listagem de Manifestações por Tipo ------------------------------
+# 2) Listagem de Manifestações por Tipo ------------------------------
 def listar_manifestacoes_tipo():
-
     print("""--- LISTAGEM DE MANIFESTAÇÕES POR TIPO ---\n
 Informe o tipo de Manifestação\n
-1) Reclamção
+1) Reclamação
 2) Elogio
 3) Sugestão
 4) Retornar
@@ -105,96 +97,107 @@ Informe o tipo de Manifestação\n
 
     limpar_console()
 
-    if opcao == "1": #Reclamção
+    if opcao == "1":  # Reclamção
         print("--- LISTA DE RECLAMAÇÕES ---\n")
-        for item in manifestacao_reclamacao:
-            print("-", item)
+        for item in manifestacoes:
+            if item["tipo"] == "Reclamção":
+                print(f"Código: {item["codigo"]}, Descrição: {item["descricao"]}, Autor: {item["autor"]}")
 
-        retornar_ou_sair()
-            
-    elif opcao == "2": #Elogio
+    elif opcao == "2":  # Elogio
         print("--- LISTA DE ELOGIOS ---\n")
-        for item in manifestacao_elogio:
-            print("-", item)
+        for item in manifestacoes:
+            if item["tipo"] == "Elogio":
+                print(f"Código: {item["codigo"]}, Descrição: {item["descricao"]}, Autor: {item["autor"]}")
 
-        retornar_ou_sair()
-            
-    elif opcao == "3": #Sugestão
+    elif opcao == "3":  # Sugestão
         print("--- LISTA DE SUGESTÕES ---\n")
-        for item in manifestacao_sugestao:
-            print("-", item)
-        
-        retornar_ou_sair()
-    
-    elif opcao == "4": #Retornar ao menu
+        for item in manifestacoes:
+            if item["tipo"] == "Sugestão":
+                print(f"Código: {item["codigo"]}, Descrição: {item["descricao"]}, Autor: {item["autor"]}")
+
+    elif opcao == "4":  # Retornar ao menu
         menu()
 
-    elif opcao == "5": #Sair
+    elif opcao == "5":  # Sair
         limpar_console()
         exit()
-    
+
     else:
         limpar_console()
         print("Opção inválida! Tente novamente...\n")
         listar_manifestacoes_tipo()
 
-#3) Criar uma nova Manifestação -------------------------------------
-def nova_manifestacao():
-
-    print("""Informe o tipo de Manifestação que você pretende criar\n
-1) Reclamção
-2) Elogio
-3) Sugestão
-4) Retornar
-5) Sair""")
-    
-    opcao = input("\nDigite uma opção: ")
-
-    if opcao == "1": #Reclamção
-        print("\nDigite sua reclamação")
-        manifestacao_reclamacao.append(input(": "))
-        limpar_console()
-        nova_manifestacao()
-            
-    elif opcao == "2": #Elogio
-        print("\nDigite seu elogio")
-        manifestacao_elogio.append(input(": "))
-        limpar_console()
-        nova_manifestacao()
-            
-    elif opcao == "3": #Sugestão
-        print("\nDigite sua sugestão")
-        manifestacao_sugestao.append(input(": "))
-        limpar_console()
-        nova_manifestacao()
-    
-    elif opcao == "4": #Retornar ao menu
-        limpar_console()
-        menu()
-
-    elif opcao == "5": #Sair
-        limpar_console()
-        exit()
-    
-    else:
-        limpar_console()
-        print("Opção inválida! Tente novamente...\n")
-        nova_manifestacao()
-
-#4) Exibir quantidade de manifestações ------------------------------
-def quantidade_manifestacoes():
-    print(F"--- CONTADOR DE MANIFESTAÇÕES ---\n")
-    print(f"Há {len(manifestacoes)} manifestações registradas.")
     retornar_ou_sair()
 
-#5) Pesquisar uma manifestação por código ---------------------------
+# 3) Criar uma nova Manifestação -------------------------------------
+def criar_manifestacao():
+    tipo = input("""\n1) Reclamação 
+2) Elogio 
+3) Sugestão 
+Informe o tipo de manifestação: """).strip()
+
+    tipos_validos = ["1", "2", "3"]
+    if tipo not in tipos_validos:
+        print("Tipo inválido. A manifestação não foi criada.")
+        retornar_ou_sair()
+        return
+
+    tipo_dict = {"1": "Reclamção", "2": "Elogio", "3": "Sugestão"}
+    tipo_manifestacao = tipo_dict[tipo]
+
+    descricao = input("Descreva a manifestação: ").strip()
+    autor = input("Informe o autor da manifestação: ").strip()
+    codigo = len(manifestacoes) + 1
+
+    nova_manifestacao = {
+        "codigo": codigo,
+        "tipo": tipo_manifestacao,
+        "descricao": descricao,
+        "autor": autor
+    }
+    manifestacoes.append(nova_manifestacao)
+    print("Manifestação criada com sucesso!")
+
+    retornar_ou_sair()
+
+# 4) Exibir quantidade de manifestações ------------------------------
+def quantidade_manifestacoes():
+    print(f"--- CONTADOR DE MANIFESTAÇÕES ---\n")
+    print(f"Há {len(manifestacoes)} manifestações registradas")
+    retornar_ou_sair()
+
+# 5) Pesquisar uma manifestação por código ---------------------------
 def pesquisar_manifestacao():
-    #print("Informe o código da manifestação que você procura")
-    pass
+    codigo = int(input("Informe o código da manifestação que você procura: ").strip())
+    encontrado = False
+    for item in manifestacoes:
+        if item['codigo'] == codigo:
+            print(f"Código: {item["codigo"]}, Tipo: {item["tipo"]}, Descrição: {item["descricao"]}, Autor: {item["autor"]}")
+            encontrado = True
+            break
+    if not encontrado:
+        print("Manifestação não encontrada")
 
-#6) 6) Excluir uma Manifestação pelo Código -------------------------
+    retornar_ou_sair()
+
+# 6) Excluir uma Manifestação pelo Código ---------------------------
 def excluir_manifestacao():
-    #print("Informe o código da manifestação que você pretende excluir")
-    pass
+    global manifestacoes
+    try:
+        codigo = int(input("Informe o código da manifestação que você pretende excluir: ").strip())
 
+        print(f"Manifestacoes antes da exclusão: {manifestacoes}")
+
+        if any(item["codigo"] == codigo for item in manifestacoes):
+            manifestacoes = [item for item in manifestacoes if item["codigo"] != codigo]
+            print("Manifestação excluída com sucesso.")
+        else:
+            print("Manifestação não encontrada")
+
+        print(f"Manifestacoes após a exclusão: {manifestacoes}")
+
+    except ValueError:
+        print("Código inválido. Informe um número inteiro")
+
+    retornar_ou_sair()
 menu()
