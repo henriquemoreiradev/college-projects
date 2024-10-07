@@ -113,9 +113,17 @@ def listar_manifestacoes():
     if len(manifestacoes) == 0:
         print("\nNão há manifestações cadastradas.") # Informa que não há manifestações cadastradas
     else:
-        print("\n--- LISTAGEM DE MANIFESTAÇÕES ---\n") # Exibe um título para a listagem
-        for item in manifestacoes:
-            print(".", item) # Imprime cada manifestação na lista
+        print("\n--- LISTAGEM DE MANIFESTAÇÕES ---\n")
+        print( 'código da manifestação: ------- manifestação:')
+        posicao_codigo = range(len(manifestacoes))  # Usa enumerate para obter o índice e a manifestação
+        for item in posicao_codigo:
+            print (item + 1,'--------',manifestacoes[item])# Exibe a posição (índice) e o conteúdo da manifestação
+
+
+
+
+
+    menu() # Volta ao menu após listar as manifestações
 
     # Chama a função retornar_ou_sair() para permitir que o usuário escolha a próxima ação
     
