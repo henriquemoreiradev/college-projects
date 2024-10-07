@@ -29,7 +29,7 @@ def menu():
     """
 
     # Exibe o menu de opções para o usuário
-    print("""\n----- MENU DO SISTEMA -----\n
+    print("""\n     --- MENU DO SISTEMA ---\n
 [1] Listagem das manifestações
 [2] Listagem de manifestações por tipo
 [3] Criar uma nova manifestação
@@ -73,7 +73,7 @@ def menu():
     else:
         # Informa ao usuário que a opção é inválida e exibe o menu novamente
         print("\nOpção inválida! Tente novamente...\n")
-        menu()
+        menu() # Chama a função menu() para exibir ao menu principal novamente
 
 # Limpar console ----------------------------------------------------
 def limpar_console():
@@ -93,42 +93,6 @@ def limpar_console():
 
     # Executa um comando do sistema operacional para limpar a tela do console
     os.system("cls" if os.name == "nt" else "clear")
-
-# Retornar ou Sair --------------------------------------------------
-def retornar_ou_sair():
-    """
-    Define uma função chamada retornar_ou_sair() que apresenta ao usuário duas opções: retornar ao menu principal ou sair do sistema.
-        1º Exibição das Opções: A função começa imprimindo duas opções:
-            - [1] Menu: Para retornar ao menu principal.
-            - [2] Sair: Para sair do sistema.
-        2º Entrada do Usuário: O código então solicita ao usuário que escolha uma dessas opções digitando um número.
-        3º Execução da Opção Escolhida: Dependendo da escolha do usuário, uma das seguintes ações é realizada:
-            - Se o usuário escolher 1, a função limpar_console() é chamada para limpar a tela, seguida pela chamada da função menu() para exibir o menu principal.
-            - Se o usuário escolher 2, a função limpar_console() é chamada para limpar a tela, seguida pela chamada da função exit() para sair do sistema.
-        4º Opção Inválida: Se o usuário digitar uma opção inválida (qualquer coisa diferente de 1 ou 2), a tela é limpa, uma mensagem de erro é exibida, e a função retornar_ou_sair() é chamada novamente, permitindo que o usuário tente outra vez.
-    """
-
-    # Exibe um menu com duas opções: voltar ao menu principal ou sair do sistema
-    print("""\n[1] Menu
-[2] Sair""")
-    
-    # Solicita ao usuário que escolha uma das opções
-    opcao = input("\n   Escolha uma opção: ")
-    
-    # Verifica a opção escolhida pelo usuário
-    if opcao == "1":
-        limpar_console() # Limpa a tela do console
-        menu() # Chama a função menu() para exibir o menu principal
-
-    elif opcao == "2":
-        limpar_console() # Limpa a tela do console
-        exit() # Sai do sistema
-
-    else:
-        # Limpa o console, exibe mensagem de erro e chama a função retornar_ou_sair() novamente para tentar outra vez
-        limpar_console()
-        print("Opção inválida! Tente novamente...\n")
-        retornar_ou_sair()
 
 #1) Listagem das Manifestações --------------------------------------
 def listar_manifestacoes():
@@ -151,10 +115,11 @@ def listar_manifestacoes():
     else:
         print("\n--- LISTAGEM DE MANIFESTAÇÕES ---\n") # Exibe um título para a listagem
         for item in manifestacoes:
-            print("-", item) # Imprime cada manifestação na lista
+            print(".", item) # Imprime cada manifestação na lista
 
     # Chama a função retornar_ou_sair() para permitir que o usuário escolha a próxima ação
-    retornar_ou_sair()
+    
+    menu() # Chama a função menu() para voltar ao menu principal
 
 #2) Listagem de Manifestações por Tipo ------------------------------
 def listar_manifestacoes_tipo():
@@ -194,9 +159,6 @@ Informe o tipo de Manifestação\n
             print("\n--- LISTA DE RECLAMAÇÕES ---\n")
             for item in manifestacao_reclamacao:
                 print("-", item)
-
-        # Após listar as reclamações, chama a função retornar_ou_sair() para permitir que o usuário escolha a próxima ação
-        retornar_ou_sair()
             
     elif opcao == "2":
         # Se o usuário escolher a opção 2, exibe a lista de elogio
@@ -207,9 +169,6 @@ Informe o tipo de Manifestação\n
             print("\n--- LISTA DE ELOGIOS ---\n")
             for item in manifestacao_elogio:
                 print("-", item)
-
-        # Após listar os elogios, chama a função retornar_ou_sair() para permitir que o usuário escolha a próxima ação
-        retornar_ou_sair()
             
     elif opcao == "3":
         # Se o usuário escolher a opção 3, exibe a lista de sugestões
@@ -220,13 +179,9 @@ Informe o tipo de Manifestação\n
             print("\n--- LISTA DE SUGESTÕES ---\n")
             for item in manifestacao_sugestao:
                 print("-", item)
-        
-        # Após listar as sugestões, chama a função retornar_ou_sair() para permitir que o usuário escolha a próxima ação
-        retornar_ou_sair()
     
     elif opcao == "4":
-        # Se o usuário escolher a opção 4, retorna ao menu principal chamando a função menu()
-        menu()
+        menu() # Chama a função menu() para voltar ao menu principal
 
     elif opcao == "5":
         # Se o usuário escolher a opção 5, limpa o console e sai do sistema com a função exit()
@@ -238,6 +193,28 @@ Informe o tipo de Manifestação\n
         limpar_console()
         print("\nOpção inválida! Tente novamente...\n")
         listar_manifestacoes_tipo()
+    
+    # Exibe um menu com duas opções: listar manifestações por tipo novamente ou voltar ao menu principal
+    print("""\n[1] Listar novamente
+[2] Menu""")
+    
+    # Solicita ao usuário que escolha uma das opções
+    opcao = input("\n   Escolha uma opção: ")
+    
+    # Verifica a opção escolhida pelo usuário
+    if opcao == "1":
+        limpar_console() # Limpa a tela do console
+        listar_manifestacoes_tipo() # Chama a função listar_manifestacoes_tipo() para listar manifestações por tipo novamente
+
+    elif opcao == "2":
+        limpar_console() # Limpa a tela do console
+        menu() # Chama a função menu() para voltar ao menu principal
+
+    else:
+        # Limpa o console, exibe mensagem de erro e chama a função retornar_ou_sair() novamente para tentar outra vez
+        limpar_console()
+        print("Opção inválida! Tente novamente...\n")
+        listar_manifestacoes_tipo() # Chama a função listar_manifestacoes_tipo()
 
 #3) Criar uma nova Manifestação -------------------------------------
 def nova_manifestacao():
@@ -271,30 +248,30 @@ def nova_manifestacao():
         print("\nDigite sua reclamação")
         manifestacao_reclamacao.append(input(": ")) # Adiciona a reclamação à lista de reclamações
         manifestacoes.append(manifestacao_reclamacao[-1]) # Adiciona a reclamação à lista geral de manifestações
-        print(f"\nO código da sua reclamação é {len(manifestacao_reclamacao)}\n") # Exibe o código da reclamação
         
-        # Chama a função retornar_ou_sair() para permitir que o usuário escolha a próxima ação
-        retornar_ou_sair()
+        limpar_console() # Limpa a tela do console
+
+        print(f"\nO código da sua reclamação é {len(manifestacao_reclamacao)}\n") # Exibe o código da reclamação
             
     elif opcao == "2":
         # Se o usuário escolher a opção 2, solicita que ele digite seu elogio
         print("\nDigite seu elogio")
         manifestacao_elogio.append(input(": ")) # Adiciona o elogio à lista de elogios
         manifestacoes.append(manifestacao_elogio[-1]) # Adiciona o elogio à lista geral de manifestações
-        print(f"\nO código do seu elogio é {len(manifestacao_elogio)}\n") # Exibe o código do elogio
         
-        # Chama a função retornar_ou_sair() para permitir que o usuário escolha a próxima ação
-        retornar_ou_sair()
+        limpar_console() # Limpa a tela do console
+
+        print(f"\nO código do seu elogio é {len(manifestacao_elogio)}\n") # Exibe o código do elogio
             
     elif opcao == "3":
         # Se o usuário escolher a opção 3, solicita que ele digite sua sugestão
         print("\nDigite sua sugestão")
         manifestacao_sugestao.append(input(": ")) # Adiciona a sugestão à lista de sugestões
         manifestacoes.append(manifestacao_sugestao[-1]) # Adiciona a sugestão à lista geral de manifestações
-        print(f"\nO código da sua sugestão é {len(manifestacao_sugestao)}\n") # Exibe o código da sugestão
         
-        # Chama a função retornar_ou_sair() para permitir que o usuário escolha a próxima ação
-        retornar_ou_sair()
+        limpar_console() # Limpa a tela do console
+
+        print(f"\nO código da sua sugestão é {len(manifestacao_sugestao)}\n") # Exibe o código da sugestão
     
     elif opcao == "4":
         # Se o usuário escolher a opção 4, limpa o console e retorna ao menu principal
@@ -311,6 +288,28 @@ def nova_manifestacao():
         limpar_console()
         print("\nOpção inválida! Tente novamente...\n")
         nova_manifestacao()
+    
+    # Exibe um menu com duas opções: criar outra manifestação ou voltar ao menu principal
+    print("""\n[1] Criar outra manifestação
+[2] Menu""")
+    
+    # Solicita ao usuário que escolha uma das opções
+    opcao = input("\n   Escolha uma opção: ")
+    
+    # Verifica a opção escolhida pelo usuário
+    if opcao == "1":
+        limpar_console() # Limpa a tela do console
+        nova_manifestacao() # Chama a função nova_manifestacao() para criar outra manifestação
+
+    elif opcao == "2":
+        limpar_console() # Limpa a tela do console
+        menu() # Chama a função menu() para voltar ao menu principal
+
+    else:
+        # Limpa o console, exibe mensagem de erro e chama a função retornar_ou_sair() novamente para tentar outra vez
+        limpar_console()
+        print("Opção inválida! Tente novamente...\n")
+        nova_manifestacao() # Chama a função nova_manifestacao()
 
 #4) Exibir quantidade de manifestações ------------------------------
 def quantidade_manifestacoes():
@@ -329,8 +328,7 @@ def quantidade_manifestacoes():
     # Imprime a quantidade total de manifestações registradas
     print(f"\nHá {len(manifestacoes)} manifestações registradas.")
 
-    # Chama a função retornar_ou_sair() para permitir que o usuário escolha a próxima ação
-    retornar_ou_sair()
+    menu() # Chama a função menu() para voltar ao menu principal
 
 #5) Pesquisar uma manifestação por código ---------------------------
 def pesquisar_manifestacao():
@@ -367,8 +365,7 @@ def pesquisar_manifestacao():
             print("\nCódigo não encontrado. Tente novamente!")
             posicao = int(input("\nInforme o código da manifestação que você procura: "))
 
-        print(f"\nA reclamação pesquisada foi:\n{manifestacao_reclamacao[posicao-1]}") # Exibe a reclamação correspondente ao código fornecido.
-        retornar_ou_sair()
+        print(f"\nA reclamação pesquisada foi:\n. {manifestacao_reclamacao[posicao-1]}") # Exibe a reclamação correspondente ao código fornecido.
             
     elif opcao == "2":
         # Se o usuário escolher a opção 2, solicita o código do elogio e exibe o elogio correspondente
@@ -379,8 +376,7 @@ def pesquisar_manifestacao():
             print("\nCódigo não encontrado. Tente novamente!")
             posicao = int(input("\nInforme o código da manifestação que você procura: "))
 
-        print(f"\nO elogio pesquisado foi:\n{manifestacao_elogio[posicao-1]}") # Exibe o elogio correspondente ao código fornecido.
-        retornar_ou_sair()
+        print(f"\nO elogio pesquisado foi:\n. {manifestacao_elogio[posicao-1]}") # Exibe o elogio correspondente ao código fornecido.
             
     elif opcao == "3":
         # Se o usuário escolher a opção 3, solicita o código da sugestão e exibe a sugestão correspondente
@@ -391,13 +387,12 @@ def pesquisar_manifestacao():
             print("\nCódigo não encontrado. Tente novamente!")
             posicao = int(input("\nInforme o código da manifestação que você procura: "))
 
-        print(f"\nA seugestão pesquisada foi:\n{manifestacao_sugestao[posicao-1]}") # Exibe a sugestão correspondente ao código fornecido.
-        retornar_ou_sair()
+        print(f"\nA seugestão pesquisada foi:\n. {manifestacao_sugestao[posicao-1]}") # Exibe a sugestão correspondente ao código fornecido.
     
     elif opcao == "4":
         # Se o usuário escolher a opção 4, limpa o console e retorna ao menu principal
         limpar_console()
-        menu()
+        menu() # Chama a função menu() para voltar ao menu principal
 
     elif opcao == "5":
         # Se o usuário escolher a opção 5, limpa o console e sai do sistema
@@ -409,6 +404,28 @@ def pesquisar_manifestacao():
         limpar_console()
         print("\nOpção inválida! Tente novamente...\n")
         nova_manifestacao()
+    
+    # Exibe um menu com duas opções: Nova pesquisa ou voltar ao menu principal
+    print("""\n[1] Nova pesquisa
+[2] Menu""")
+    
+    # Solicita ao usuário que escolha uma das opções
+    opcao = input("\n   Escolha uma opção: ")
+    
+    # Verifica a opção escolhida pelo usuário
+    if opcao == "1":
+        limpar_console() # Limpa a tela do console
+        pesquisar_manifestacao() # Chama a função pesquisar_manifestacao() para pesquisar novamente
+
+    elif opcao == "2":
+        limpar_console() # Limpa a tela do console
+        menu() # Chama a função menu() para voltar ao menu principal
+
+    else:
+        # Limpa o console, exibe mensagem de erro e chama a função retornar_ou_sair() novamente para tentar outra vez
+        limpar_console()
+        print("Opção inválida! Tente novamente...\n")
+        pesquisar_manifestacao() # Chama a função pesquisar_manifestacao()
 
 #6) 6) Excluir uma Manifestação pelo Código -------------------------
 def excluir_manifestacao():
@@ -519,6 +536,28 @@ def excluir_manifestacao():
     
     # Informa que a manifestação foi excluída com sucesso e chama a função retornar_ou_sair()
     print(f"\nA manifestação foi excluída com sucesso!\n")
-    retornar_ou_sair()
+    
+    # Exibe um menu com duas opções: excluir outra manifestação ou voltar ao menu principal
+    print("""\n[1] Excluir outra manifestação
+[2] Menu""")
+    
+    # Solicita ao usuário que escolha uma das opções
+    opcao = input("\n   Escolha uma opção: ")
+    
+    # Verifica a opção escolhida pelo usuário
+    if opcao == "1":
+        limpar_console() # Limpa a tela do console
+        excluir_manifestacao() # Chama a função excluir_manifestacao() para excluir outra manifestação
 
+    elif opcao == "2":
+        limpar_console() # Limpa a tela do console
+        menu() # Chama a função menu() para voltar ao menu principal
+
+    else:
+        # Limpa o console, exibe mensagem de erro e chama a função retornar_ou_sair() novamente para tentar outra vez
+        limpar_console()
+        print("Opção inválida! Tente novamente...\n")
+        excluir_manifestacao() # Chama a função excluir_manifestacao()
+
+limpar_console() # Limpa a tela do console
 menu() # Chama a função menu() para exibir o menu principal
