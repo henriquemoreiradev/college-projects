@@ -1,8 +1,8 @@
 manifestacoes = []
 
-manifestacao_reclamacao = []
-manifestacao_elogio  = []
-manifestacao_sugestao = []
+manifestacao_reclamacao = ["reclamacao1"]
+manifestacao_elogio  = ["elogio1"]
+manifestacao_sugestao = ["sugestao1","sugestao2"]
 
 manifestacoes = manifestacao_reclamacao + manifestacao_elogio + manifestacao_sugestao
 
@@ -74,6 +74,8 @@ def retornar_ou_sair():
 
 #1) Listagem das Manifestações --------------------------------------
 def listar_manifestacoes():
+
+    manifestacoes = manifestacao_reclamacao + manifestacao_elogio + manifestacao_sugestao
 
     if len(manifestacoes) == 0:
         print("Não há manifestações cadastradas.")
@@ -150,21 +152,24 @@ def nova_manifestacao():
         manifestacao_reclamacao.append(input(": "))
         manifestacoes.append(manifestacao_reclamacao[-1])
         print(f"O código da sua reclamação é {len(manifestacao_reclamacao)}\n")
-        nova_manifestacao()
+        limpar_console()
+        menu()
             
     elif opcao == "2": #Elogio
         print("\nDigite seu elogio")
         manifestacao_elogio.append(input(": "))
         manifestacoes.append(manifestacao_elogio[-1])
         print(f"O código do seu elogio é {len(manifestacao_elogio)}\n")
-        nova_manifestacao()
+        limpar_console()
+        menu()
             
     elif opcao == "3": #Sugestão
         print("\nDigite sua sugestão")
         manifestacao_sugestao.append(input(": "))
         manifestacoes.append(manifestacao_sugestao[-1])
         print(f"O código da sua sugestão é {len(manifestacao_sugestao)}\n")
-        nova_manifestacao()
+        limpar_console()
+        menu()
     
     elif opcao == "4": #Retornar ao menu
         limpar_console()
@@ -187,11 +192,44 @@ def quantidade_manifestacoes():
 
 #5) Pesquisar uma manifestação por código ---------------------------
 def pesquisar_manifestacao():
-    global manifestacoes
+    
     print(f"--- BUSCAR MANIFESTAÇÁO ---\n")
-    posicao = int(input("Informe o código da manifestação que você procura: "))
-    print(f"O elemento pesquisado foi {manifestacoes[posicao-1]}")
-    retornar_ou_sair()
+    print("""Informe o tipo de Manifestação que você pretende criar\n
+1) Reclamção
+2) Elogio
+3) Sugestão
+4) Retornar
+5) Sair""")
+    
+    opcao = input("\nDigite uma opção: ")
+
+    if opcao == "1": #Reclamção
+        posicao = int(input("Informe o código da manifestação que você procura: "))
+        print(f"A reclamação pesquisada foi:\n{manifestacao_reclamacao[posicao-1]}")
+        retornar_ou_sair()
+            
+    elif opcao == "2": #Elogio
+        posicao = int(input("Informe o código da manifestação que você procura: "))
+        print(f"O elogio pesquisado foi:\n{manifestacao_elogio[posicao-1]}")
+        retornar_ou_sair()
+            
+    elif opcao == "3": #Sugestão
+        posicao = int(input("Informe o código da manifestação que você procura: "))
+        print(f"A seugestão pesquisada foi:\n{manifestacao_sugestao[posicao-1]}")
+        retornar_ou_sair()
+    
+    elif opcao == "4": #Retornar ao menu
+        limpar_console()
+        menu()
+
+    elif opcao == "5": #Sair
+        limpar_console()
+        exit()
+    
+    else:
+        limpar_console()
+        print("Opção inválida! Tente novamente...\n")
+        nova_manifestacao()
 
 #6) 6) Excluir uma Manifestação pelo Código -------------------------
 def excluir_manifestacao():
@@ -208,9 +246,13 @@ def excluir_manifestacao():
 
     if opcao == "1": #Reclamção
         posicao = int(input("Informe o código da reclamação que você pretende excluir: "))
+
+        while posicao > len(manifestacao_reclamacao):
+            print("Código não encontrado. Tente novamente!")
+            posicao = int(input("Informe o código da reclamação que você pretende excluir: "))
         
         confirmar = input(f"O código informado foi {posicao}. Digite 's' para confirmar e 'n' para corrigir: ")
-        
+                
         if confirmar == "s":
             del manifestacao_reclamacao[posicao-1]
         elif confirmar == "n":
@@ -223,6 +265,10 @@ def excluir_manifestacao():
     elif opcao == "2": #Elogio
         posicao = int(input("Informe o código do elogio que você pretende excluir: "))
         
+        while posicao > len(manifestacao_elogio):
+            print("Código não encontrado. Tente novamente!")
+            posicao = int(input("Informe o código da reclamação que você pretende excluir: "))
+
         confirmar = input(f"O código informado foi {posicao}. Digite 's' para confirmar e 'n' para corrigir: ")
         
         if confirmar == "s":
@@ -237,6 +283,10 @@ def excluir_manifestacao():
     elif opcao == "3": #Sugestão
         posicao = int(input("Informe o código da sugestão que você pretende excluir: "))
         
+        while posicao > len(manifestacao_sugestao):
+            print("Código não encontrado. Tente novamente!")
+            posicao = int(input("Informe o código da reclamação que você pretende excluir: "))
+
         confirmar = input(f"O código informado foi {posicao}. Digite 's' para confirmar e 'n' para corrigir: ")
         
         if confirmar == "s":
