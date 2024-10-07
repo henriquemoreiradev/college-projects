@@ -1,5 +1,5 @@
 """
-    1. Exiba três strings diferentes.
+1.  Exiba três strings diferentes.
 """
 print("três")
 print("strings")
