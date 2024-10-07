@@ -353,7 +353,7 @@ def pesquisar_manifestacao():
     
     # Exibe um título e um menu para o usuário escolher o tipo de manifestação a ser pesquisada
     print(f"\n--- BUSCAR MANIFESTAÇÁO ---\n")
-    print("""Informe o tipo de Manifestação que você pretende criar\n
+    print("""Informe o tipo de Manifestação que você pretende pesquisar\n
 [1] Reclamção
 [2] Elogio
 [3] Sugestão
