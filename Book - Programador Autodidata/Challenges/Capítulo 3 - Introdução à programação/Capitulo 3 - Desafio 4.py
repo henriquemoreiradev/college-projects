@@ -4,8 +4,8 @@
 
 numero = []
 
-for item in range(2):
-    numero.append(float(input(f"Digite o {item + 1}º número: ")))
+for i in range(2):
+    numero.append(float(input(f"Digite o {i + 1}º número: ")))
 
 resto = numero[0] % numero[1]
 print(f"O resto é {resto}")
