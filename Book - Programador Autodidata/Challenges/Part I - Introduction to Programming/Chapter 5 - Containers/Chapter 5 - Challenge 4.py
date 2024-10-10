@@ -1,5 +1,4 @@
-'''Escreva um programa que permita que o usuário pergunte sua altura, cor favorita ou autor
-favorito e retorne o resultado a partir do dicionário criado no desafio anterior.'''
+''' 4.  Write a program that allows the user to ask you your height, favorite color, or favorite author and returns the result from the dictionary created in the previous challenge.    '''
 
 henrique = {
             "Altura":176,

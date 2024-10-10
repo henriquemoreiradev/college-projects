@@ -1,0 +1,1 @@
+''' 10. Slice the string "It was a bright cold day in April, and the clocks were striking thirteen." so that it only includes the characters before the comma.  '''

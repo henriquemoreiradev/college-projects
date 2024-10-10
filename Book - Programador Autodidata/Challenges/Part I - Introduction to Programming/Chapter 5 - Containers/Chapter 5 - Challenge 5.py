@@ -1,5 +1,4 @@
-'''Crie um dicionário que mapeie seus músicos favoritos para uma lista das canções que você mais
-gosta deles.'''
+''' 5.  Create a dictionary that maps your favorite musicians to a list of your favorite songs by them.   '''
 
 musicos_favoritos = {
                       "Oswaldo Montenegro":"Outra vez",

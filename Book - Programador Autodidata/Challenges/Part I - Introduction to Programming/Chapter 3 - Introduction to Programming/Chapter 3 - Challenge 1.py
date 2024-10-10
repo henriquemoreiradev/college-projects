@@ -1,4 +1,4 @@
-'''Exiba três strings diferentes'''
+''' 1.  Display three different strings.    '''
 
 print("Henrique")
 print("Moreira")

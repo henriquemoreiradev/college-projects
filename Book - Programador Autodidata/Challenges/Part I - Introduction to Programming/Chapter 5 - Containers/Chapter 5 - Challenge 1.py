@@ -1,3 +1,3 @@
-'''Crie uma lista de seus músicos favoritos.'''
+''' 1.  Create a list of your favorite musicians.   '''
 
 musicos_favoritos = ["Oswaldo Montenegro","Legião Urbana","Maneva"]

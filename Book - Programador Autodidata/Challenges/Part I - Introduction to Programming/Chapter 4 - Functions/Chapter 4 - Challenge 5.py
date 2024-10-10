@@ -1,5 +1,5 @@
-'''Escreva uma função que converta uma string em um float e retorne o resultado. Use a
-manipulação de exceções para capturar a exceção que pode ocorrer.'''
+''' 5.  Write a function that converts a string to a float and returns the result.
+        Use exception handling to catch the exception that may occur.   '''
 
 def funcao(a):
     return(float(a))

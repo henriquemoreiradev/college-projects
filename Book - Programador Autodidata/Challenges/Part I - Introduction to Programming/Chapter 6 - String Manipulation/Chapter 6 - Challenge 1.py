@@ -1,4 +1,4 @@
-'''Exiba cada caractere da string “Camus”.'''
+''' 1.  Display each character of the string “Camus”.    '''
 
 string = "Camus"
 
