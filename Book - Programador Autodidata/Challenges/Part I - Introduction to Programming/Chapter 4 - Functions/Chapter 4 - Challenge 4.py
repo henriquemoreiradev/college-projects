@@ -3,18 +3,13 @@
         The second function should take an integer as a parameter and return the result of the integer multiplied by 4.
         Call the first function, save the result as a variable, and pass it as a parameter to the second function.  '''
 
-#   construir a primeira função
-valor_a = 8
+def divide(number):
+    return number / 2
 
-def funcao_a(a):
-    return int(a/2)
+def multiply(number):
+    return number * 4
 
-print(funcao_a(valor_a))
+number_one = divide(8)
+number_two = multiply(number_one)
 
-#   construir a segunda função
-valor_b = funcao_a(valor_a)
-
-def funcao_b(b):
-    return int(b*4)
-
-print(funcao_b(valor_b))
+print(number_two)

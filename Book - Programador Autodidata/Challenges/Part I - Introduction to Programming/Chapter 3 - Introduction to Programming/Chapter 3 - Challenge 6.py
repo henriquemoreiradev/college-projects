@@ -2,6 +2,6 @@
 
 age = 28
 if age < 18:
-    print ("você é menor")
+    print ("You are underage")
 else:
-    print ("você é maior")
+    print ("You are of legal age")
