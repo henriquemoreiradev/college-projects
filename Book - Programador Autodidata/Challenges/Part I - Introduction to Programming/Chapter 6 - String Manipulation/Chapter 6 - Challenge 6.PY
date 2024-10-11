@@ -1,0 +1,1 @@
+''' 6.  Replace each occurrence of "s" in "A screaming comes across the sky." with a dollar sign.    '''
